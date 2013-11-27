@@ -1,4 +1,5 @@
 import traceback
+import commands
 
 # Global flag to turn ON debugging across all files
 GLOBAL_DEBUG_ON = True
@@ -34,3 +35,17 @@ def get_current_method_signature():
     """
     (filename, line_number, function_name, text) = traceback.extract_stack()[-2]
     return 'watson.%s : %s' % (filename.split('/')[-1][:-3], function_name)
+
+def check_less():
+    """
+    Perform system check to see if we are able to use unix less for printing
+    """
+    commands.getstatusoutput('which fred > /dev/null 2>&1')
+    # Check if system has less (so we can print out to it to allow scrolling)
+    # [todo] - Implement this scrolling thing inside watson with ncurses
+    # [review] - Is there a better way to do this with subprocess.call? Whats the difference?
+    if commands.getstatusoutput('which less > /dev/null 2>&1') == 0:
+        return True
+
+    return False
+
