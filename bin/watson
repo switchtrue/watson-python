@@ -1,16 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# [todo] - This should probably be a python script in a Scripts directory - see http://calvinx.com/2012/09/09/python-packaging-define-an-entry-point-for-console-commands/
+
 import sys
 import os
 
-# [review] - Using own funky path loading because traditional way seems wrong?
-# Commented out version is traditional, seen in many apps. If you use that and
-# look at load_path you get path/../lib (I'd expect those to be separate?)
-# My funky version adds path/., path/bin, path/assets separately
-# Maybe I don't get how the load path is supposed to look though...
-
-
+# [review] - Ho do we do the path properly? This will not work as its the current working directory.
 sys.path.append(os.getcwd())
 
 from watson.command import Command
