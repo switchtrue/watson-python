@@ -11,7 +11,7 @@ import os
 # Maybe I don't get how the load path is supposed to look though...
 
 
-sys.path.append(os.getcwd() + '/lib')
+sys.path.append(os.getcwd())
 
 from watson.command import Command
 

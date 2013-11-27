@@ -121,8 +121,8 @@ class Config:
 
         # Get the absolute path to the directory this source is in.
         s = os.path.abspath(sys.modules[Config.__module__].__file__)
-        # [review] - regex uses (.?)+ to grab anything after lib (optional), better regex?
-        full_path = re.sub(r'/lib/watson(.?)+', '', s) + "/assets/defaultConf"
+        # [review] - regex uses (.?)+ to grab anything after watson (optional), better regex?
+        full_path = re.sub(r'/watson(.?)+', '', s) + "/assets/defaultConf"
 
         # Check to make sure we can access the default file
         if not FS.check_file(full_path):
