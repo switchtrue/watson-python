@@ -52,7 +52,7 @@ class Command:
             help='list of directories to search in')
         parser.add_argument('-f', '--files', dest='files',
             help='list of files to search in')
-        parser.add_argument('-i', '--ignore', dest='ignore',
+        parser.add_argument('-i', '--ignore', dest='ignores',
             help='list of files, directories, or types to ignore')
         parser.add_argument('-p', '--parse-depth', dest='parse_depth',
             help='depth to recursively parse directories')
@@ -83,27 +83,43 @@ class Command:
 
         if args.dirs:
             debug_print('Found -d/--dirs argument')
+            set_dirs(args.dirs)
 
         if args.files:
             debug_print('Found -f/--files argument')
+            set_files(args.files)
 
-        if args.ignore:
+        if args.ignores:
             debug_print('Found -i/--ignore argument')
+            set_ignores(aargs.ignores)
 
         if args.parse_depth:
             debug_print('Found -p/--parse-depth argument')
+            set_parse_depth(args.parse_depth)
 
         if args.remote:
             debug_print('Found -r/--remote argument')
+            Command.config.check_conf()
+            Command.config.read_conf()
+            setup_remote(args.remote)
+
+            sys.exit(0)
 
         if args.show:
             debug_print('Found -s/--show argument')
+            set_show_type(args.show)
         
         if args.tags:
             debug_print('Found -t/--tags argument')
+            set_tags(args.tags)
 
         if args.update:
             debug_print('Found -u/--update argument')
+            Command.config.remote_valid = True
+
+        debug_print("Running watson...")
+
+        Command.config.run()
 
     @staticmethod
     def set_context(args):
