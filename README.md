@@ -9,7 +9,7 @@ It is avaliable in three flavors, [watson-ruby](http://github.com/nhmood/watson-
 ### See the RDoc documentation [here](http://goosecode.com/watson/ruby/doc/) ([mirror](http://nhmood.github.io/watson-ruby/ruby/doc/))
 
 ## Installation
-watson-pyton has been tested with **Python 2.7.5** (on Mac OS 10.9 Mavericks)
+watson-python has been tested with **Python 2.7.5** (on Mac OS 10.9 Mavericks)
 watson-python requires no additional dependancies.
 
 ### From Repo
