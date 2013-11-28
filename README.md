@@ -1,31 +1,30 @@
-# watson-python a Python port of [watson-ruby](http://github.com/nhmood/watson-ruby)
-Currently a work in progress.
-
-# watson-ruby [![Build Status](https://travis-ci.org/nhmood/watson-ruby.png?branch=master)](https://travis-ci.org/nhmood/watson-ruby)
+# watson-python
 ### an inline issue manager
 [watson](http://goosecode.com/watson) ([mirror](http://nhmood.github.io/watson-ruby)) is a tool for creating and tracking bug reports, issues, and internal notes in code.  
-It is avaliable in two flavors, [watson-ruby](http://github.com/nhmood/watson-ruby) and [watson-perl](http://github.com/nhmood/watson-perl)
+It is avaliable in three flavors, [watson-ruby](http://github.com/nhmood/watson-ruby), [watson-python](http://github.com/mleonard87/watson-python) and [watson-perl](http://github.com/nhmood/watson-perl)
+
+## This is a work in progess port of [watson-ruby](http://github.com/nhmood/watson-ruby)
 
 ### See watson in action [here](http://goosecode.com/watson) ([mirror](http://nhmood.github.io/watson-ruby))
 ### See the RDoc documentation [here](http://goosecode.com/watson/ruby/doc/) ([mirror](http://nhmood.github.io/watson-ruby/ruby/doc/))
 
 ## Installation
-watson-ruby has been tested with **Ruby v2.0.0p247** and **RubyGems v2.0.3** (on **Arch Linux**)  
-watson-ruby requires the ```json``` gem
+watson-pyton has been tested with **Python 2.7.5** (on Mac OS 10.9 Mavericks)
+watson-python requires no additional dependancies.
 
 ### From Repo
-watson-ruby is avaliable as a RubyGems ([link](https://rubygems.org/gems/watson-ruby)).  
-You can either download it directory from ```gem``` using
+[todo] - sort this section out.
+watson-python is avaliable via PyPI ([link](https://????)).  
+You can either download it directly from ```PyPI``` using
 ```
-gem install watson-ruby
+pip watson-python
 ```
 
-Or you can clone this repo and install with Rake
+or you can clone this repo and install with setuptools.
 ```
-git clone https://github.com/nhmood/watson-ruby.git .
-cd watson-ruby
-bundle install
-bundle exec rake
+git clone https://github.com/mleonard87/watson-python.get .
+cd watson-python
+python setup.py install
 ```
 
 ## Usage
@@ -34,7 +33,7 @@ See below for a description of what all the command line arguments do.
 
 ### Supported Languages
 If you see something missing from the list please either file an issue or  
-submit a pull request (comment parsing happens in **lib/watson/paser.rb**)
+submit a pull request (comment parsing happens in **watson/paser.py**)
 
 - **C / C++**
 - **Objective C**
@@ -52,6 +51,10 @@ submit a pull request (comment parsing happens in **lib/watson/paser.rb**)
 - **Python**
 - **Coffeescript**
 - **Clojure**
+[todo] - Implement Oracle PL/SQL parser.
+- **Oracle PL/SQL** (.pks, .pkb, .trg, .fnc, .prc)
+[todo] - Implement XML parser.
+- **XML**
 
 ## Command line arguments
 ```
@@ -168,15 +171,8 @@ Currently, OAuth has yet to be implemented for Bitbucket so the Bitbucket userna
 The remote related .watsonrc options shouldn't need to be edited manually, as they are automatically populated when the -r, --remote setup is called.  
 
 ## Special Thanks
-Special thanks to [@samirahmed](http://github.com/samirahmed) for his super Ruby help and encouraging the Ruby port!  
-Special thanks to [@eugenekolo](http://twitter.com/eugenekolo) [[email](eugenek@bu.edu)] for his super Perl help!  
-Special thanks to [@crowell](http://github.com/crowell) for testing out watson-ruby!  
+Special thanks to [@nhmood](http://github.com/nhmood) for creating watson (ruby and perl versions).
 
 ## FAQ
-- **Why Ruby?**  
-  I wanted to learn Ruby and this seemed like a pretty decent project.
-
-- **Why is the Ruby version different from the Perl version?**  
-  The Ruby version was developed after the Perl version was made. Because of this, it was a lot easier to add on features that were thought of while/after making the Perl version as the plumbing was still being setup.  
-  With a combination of wanting to finish watson-ruby as well as laziness, some of the improvements that were added to watson-ruby *have yet* to be pulled back into watson-perl.  
-  If you are interested in helping out or maintaining watson-perl let me know!
+- **Why Python?**  
+  I really wanted to use watson at work and due to various restirctions Ruby and Perl wern't ideal. I already used Python so it seemed like a good idea to port it.
