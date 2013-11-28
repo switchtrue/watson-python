@@ -44,7 +44,7 @@ def check_less():
     # Check if system has less (so we can print out to it to allow scrolling)
     # [todo] - Implement this scrolling thing inside watson with ncurses
     # [review] - Is there a better way to do this with subprocess.call? Whats the difference?
-    if commands.getstatusoutput('which less > /dev/null 2>&1') == 0:
+    if commands.getstatusoutput('which less > /dev/null 2>&1')[0] == 0:
         return True
 
     return False
