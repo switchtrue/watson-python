@@ -188,12 +188,20 @@ class Config:
 
         # Fix line endings so we can support Windows/Linux edited rc files
         rc = re.sub(r'\r\n?', '\n', rc)
+
+        # Pre-compile the regexes here for performance inside the loops.
+        comment_re = re.compile(r'(^#)|(^\n)|(^ *$)')
+        section_re = re.compile(r'\[(?P<section_name>\w+)\]')
+        dir_re = re.compile(r'^(([\w*]+)?\.?\/?)+')
+        tag_re = re.compile(r'(?P<tag_name>\S+)')
+        ignores_re = re.compile(r'^(?P<ignore_name>([\w*]+)?\.?\/?)+')
+
         for line in rc.splitlines():
             debug_print("%d: %s" % (i, line))
             i += 1
 
             # Ignore full line comments or newlines
-            mtch = re.match(r'(^#)|(^\n)|(^ *$)', line)
+            mtch = comment_re.match(line)
             if mtch:
                 debug_print("Full line comment or newline found, skipping")
                 continue
@@ -201,9 +209,9 @@ class Config:
             # Regex on line to find out if we are in a new [section] of
             # config parameters. If so, store it into section var and move
             # to next line
-            mtch = re.match(r'\[(\w+)\]', line)
+            mtch = section_re.match(line)
             if mtch:
-                debug_print("Found section %s" % mtch.group(1))
+                debug_print("Found section %s" % mtch.group('section_name'))
                 section = mtch.group(1)
                 continue
 
@@ -228,8 +236,9 @@ class Config:
                 # Regex to grab directory
                 # Substitute trailing / (necessary for later formatting)
                 # and push to self.dir_list
-                mtch = re.match(r'^(([\w*]+)?\.?\/?)+', line)
+                mtch = dir_re.match(line)
                 if mtch:
+                    # [review] - why doesnt a named group match corrently for this regex?
                     dir_path = mtch.group(0).rstrip('/')
                     self.dir_list.append(dir_path)
                     debug_print("%s added to self.dir_list" % dir_path)
@@ -247,9 +256,9 @@ class Config:
                 # [review] - Need to think about what kind of tags this supports
                 # Check compatibility with GitHub + Bitbucket and what makes sense
                 # Only supports single word+number tags
-                mtch = re.match(r'(\S+)', line)
+                mtch = tag_re.match(line)
                 if mtch:
-                    tag = mtch.group(0)
+                    tag = mtch.group('tag_name')
                     self.tag_list.append(tag)
                     debug_print("%s added to @tag_list" % tag)
 
@@ -266,8 +275,9 @@ class Config:
                 # Don't eliminate trailing / because not sure if dir can have
                 # same name as file (Linux it can't, but not sure about Win/Mac)
                 # [review] - Can Win/Mac have dir + file with same name in same dir?
-                mtch = re.match(r'^(([\w*]+)?\.?\/?)+', line)
+                mtch = ignores_re.match(line)
                 if mtch:
+                    # [review] - why doesnt a named group match corrently for this regex?
                     dir_path = mtch.group(0)
                     self.ignore_list.append(dir_path)
                     debug_print("%s added to self.ignore_list" % dir_path)
