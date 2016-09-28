@@ -176,3 +176,6 @@ Special thanks to [@nhmood](http://github.com/nhmood) for creating watson (ruby 
 ## FAQ
 - **Why Python?**  
   I really wanted to use watson at work and due to various restirctions Ruby and Perl wern't ideal. I already used Python so it seemed like a good idea to port it.
+  
+## Performance
+watson-python is being profiled and tuned using [PyVmMonitor](http://www.pyvmmonitor.com/).
